@@ -1,0 +1,65 @@
+<div class="container">
+<div class="row">
+  <form (ngSubmit)="onSubmit(register)" #register="ngForm" >
+    <div class="form-group">
+      <div>
+      <label for="studno"> Student Number </label>
+      <input type="text" id="studno" class="form-control" ngModel name="studno" required pattern="[0-9]+" #studno="ngModel">
+      </div>
+      <div *ngIf="studno.invalid"><h4>Invalid Student Number</h4></div>
+      
+      <div>
+      <label for="studfname"> Student First Name </label>
+      <input type="text" id="studfname" class="form-control" ngModel name="studfname" required pattern="[A-z]+" #studfname="ngModel"><br>
+      </div>
+      <div *ngIf="studfname.invalid"><h4>Invalid Student First Name</h4></div>
+
+      <div>
+      <label for="studlname"> Student Last Name </label>
+      <input type="text" id="studlname" class="form-control" ngModel name="studlname" required pattern="[A-z]+" #studlname="ngModel"><br>
+      </div>
+      <div *ngIf="studlname.invalid"><h4>Invalid Student Last Name</h4></div>
+
+      <div>
+      <label for="studprog"> Student Program </label>
+      <input type="text" id="studprog" class="form-control" ngModel name="studprog" required pattern="[A-z]+" #studprog="ngModel"><br>
+      </div>
+      <div *ngIf="studprog.invalid"><h4>Invalid Student Program</h4></div>
+
+      <div>
+      <label for="studyr"> Student Year </label>
+      <input type="text" id="studyr" class="form-control" ngModel name="studyr" required pattern="[1-5]" #studyr="ngModel"><br>
+      </div>
+      <div *ngIf="studyr.invalid"><h4>Invalid Student Year</h4></div>
+    </div>
+
+    <div id="options">
+      <button class="btn btn-primary" type="submit" [disabled]="register.invalid" id="addStudents" (click)="addStudentEntry()">Add Student Entry</button>
+      <button id="listStudents" (click)="listStudents()">List Students</button>
+    </div>
+  </form>
+</div>
+</div>
+
+<div *ngIf="printing">
+  <table>
+    <thead>
+      <tr>
+        <th>Student Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Program</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let studentRecord of studentCollection">
+        <td>{{ studentRecord.studNumber }}</td>
+        <td>{{ studentRecord.studFirstName }}</td>
+        <td>{{ studentRecord.studLastName }}</td>
+        <td>{{ studentRecord.studProgram }}</td>
+        <td>{{ studentRecord.studYear }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
